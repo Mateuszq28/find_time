@@ -6,10 +6,15 @@ def text2date_scope(person_time_text):
     date_list = []
     person_time_list = person_time_text.split("\n")
     for l in person_time_list:
-        time_in = l[0:16]
-        time_out = l[0:11] + l[17:22]
-        date_time_obj_in = datetime.strptime(time_in, '%d.%m.%Y %H:%M')
-        date_time_obj_out = datetime.strptime(time_out, '%d.%m.%Y %H:%M')
+        time_in = l[0:14]
+        time_out = l[0:9] + l[15:20]
+        date_time_obj_in = datetime.strptime(time_in, '%d.%m.%y %H:%M')
+        date_time_obj_out = datetime.strptime(time_out, '%d.%m.%y %H:%M')
+        # to samo inaczej
+        # time_in = l[0:7] + "20" + l[7:9] + l[9:14]
+        # time_out = l[0:7] + "20" + l[7:9] + l[15:20]
+        # date_time_obj_in = datetime.strptime(time_in, '%d.%m.%Y %H:%M')
+        # date_time_obj_out = datetime.strptime(time_out, '%d.%m.%Y %H:%M')
         date_list.append([date_time_obj_in, date_time_obj_out])
     return sorted(date_list)
 
@@ -102,7 +107,7 @@ def main():
         date_text = f.read()
 
     person_time_list = date_text.split("\n\n")
-    common = find_common_time(person_time_list)
+    common = sorted(find_common_time(person_time_list))
     common_text = scope2text(common)
     print(common_text)
     path = os.path.join(dirname, "result.txt")
