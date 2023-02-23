@@ -3,8 +3,8 @@
 1. Pobrać i rozpakować tak, aby w jednym folderze mieć pliki "find_time.py" oraz "dates.txt"
 2. W pliku "dates.txt" wpisujemy możliwe terminy pasujące kolejnym osobom w formacie:
 
-23.02.2024 00:00-23:30
-23.02.2023 00:00-23:30
+23.02.2024 00:00-23:30<br>
+23.02.2023 00:00-23:30<br>
 24.02.2023 00:00-23:30
 25.02.2023 00:00-23:30
 26.02.2023 17:00-23:30
