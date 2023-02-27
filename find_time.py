@@ -34,27 +34,34 @@ def n_in_common_day(com_day, n):
     if n1[0].time() == n2[0].time() and n1[1].time() == n2[1].time():
         # przedziały równe
         return n1
-    if n1[0].time() < n2[0].time() and n1[1].time() > n2[0].time() and n1[1].time() < n2[1].time():
-        # drugi przed pierwszym, nakładają się
-        return [n2[0], n1[1]]
-    if n2[0].time() < n1[0].time() and n2[1].time() > n1[0].time() and n2[1].time() < n1[1].time():
+    if n1[0].time() < n2[0].time() and n1[1].time() >= n2[0].time() and n1[1].time() < n2[1].time():
         # pierwszy przed drugim, nakładają się
+        return [n2[0], n1[1]]
+    if n2[0].time() < n1[0].time() and n2[1].time() >= n1[0].time() and n2[1].time() < n1[1].time():
+        # drugi przed pierwszym, nakładają się
         return [n1[0], n2[1]]
-    if n1[0].time() > n2[0].time() and n1[1].time() < n2[1].time():
+    if n1[0].time() >= n2[0].time() and n1[1].time() <= n2[1].time():
         # pierwszy zawiera się w drugim
         return n1
-    if n2[0].time() > n1[0].time() and n2[1].time() < n1[1].time():
+    if n2[0].time() >= n1[0].time() and n2[1].time() <= n1[1].time():
         # drugi zawiera się w pierwszym
         return n2
+    else:
+        raise NotImplementedError() 
 
 
 # n - pojedynczy rekord przedziału jednej osoby
 # common - wszystkie wspólnie odselekcjonowane bramką AND przedziały (rekordy)
 # zwraca nowe common
 def n_in_common(n, common):
-    if n < common[0] or n > common[-1]:
-        return []
-    else:
+    if len(common) >= 1:
+
+        # ten fragment kodu wycięty, bo ryzyko błędu, jeśli common nie jest posortowane
+        # sytuacja i tak jest obsługiwana w innym fragmencie
+        # if n[1] < common[0][0] or n[0] > common[-1][1]:
+        #     return []
+        # else:
+
         # odsiewamy rekordy, patrząc tylko na te z tymi samymi dniami
         day1 = n[0].date()
         common_days = [c for c in common if c[0].date() == day1]
@@ -67,17 +74,20 @@ def n_in_common(n, common):
                 if n_cut is not None:
                     new_common_days.append(n_cut)
             return new_common_days
+    else:
+        return []
                 
 
 # na wejściu lista czasów wszystkich osób
 def find_common_time(person_time_list):
     if len(person_time_list) == 0:
-        return ""
+        return []
     elif len(person_time_list) == 1:
-        return person_time_list[0]
+        return text2date_scope(person_time_list[0])
     else:
         common = text2date_scope(person_time_list[0])
         for p in person_time_list[1:]:
+            # print("\n", p)
             new_scope = text2date_scope(p)
             new_common = []
             for n in new_scope:
@@ -87,6 +97,9 @@ def find_common_time(person_time_list):
                         new_common.append(n_c)
             # podmnieniamy, bo bramka AND
             # common.clear()
+            new_common_tab = [x[0].day for x in new_common]
+            if 8 not in new_common_tab:
+                print("teraz")
             common = new_common
     return common
         
@@ -99,6 +112,14 @@ def scope2text(common):
     return text
 
 
+def delete_prefix(person_time_list_with_prefix_line):
+    new_list = []
+    for person_string in person_time_list_with_prefix_line:
+        person_lines = person_string.split("\n")
+        new_list.append("\n".join(person_lines[1:]))
+    return new_list
+
+
 def main():
     # main
     dirname = os.path.dirname(__file__)
@@ -106,7 +127,8 @@ def main():
     with open(path, 'r') as f:
         date_text = f.read()
 
-    person_time_list = date_text.split("\n\n")
+    person_time_list_with_prefix_line = date_text.split("\n\n")
+    person_time_list = delete_prefix(person_time_list_with_prefix_line)
     common = sorted(find_common_time(person_time_list))
     common_text = scope2text(common)
     print(common_text)
