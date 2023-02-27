@@ -3,7 +3,7 @@
 1. Pobrać i rozpakować tak, aby w jednym folderze mieć pliki "find_time.py" oraz "dates.txt"
 2. W pliku "dates.txt" wpisujemy możliwe terminy pasujące kolejnym osobom w formacie:
 
-osoba 1
+osoba 1<br>
 23.02.24 00:00-23:30<br>
 23.02.23 00:00-23:30<br>
 24.02.23 00:00-23:30<br>
@@ -22,12 +22,12 @@ osoba 1
 01.12.98 00:00-00:01<br>
 08.03.23 00:00-23:30<br>
 
-osoba 2
+osoba 2<br>
 05.03.23 09:00-10:30<br>
 06.03.23 11:00-13:39<br>
 02.03.23 10:00-17:00<br>
 
-osoba 3
+osoba 3<br>
 23.02.23 00:00-23:30<br>
 24.02.23 00:00-23:30<br>
 25.02.23 00:00-23:30<br>
@@ -43,7 +43,7 @@ Jeśli ktoś danego dnia ma dwa wolne bloki, wpisujemy je linijka pod linijką t
 1. Download and unpack so that in one folder have files "find_time.py" and "dates.txt".
 2. In the "dates.txt" file, enter possible dates matching subsequent people in the format:
 
-person 1
+person 1<br>
 23.02.24 00:00-23:30<br>
 23.02.23 00:00-23:30<br>
 24.02.23 00:00-23:30<br>
@@ -62,12 +62,12 @@ person 1
 01.12.98 00:00-00:01<br>
 08.03.23 00:00-23:30<br>
 
-person 2
+person 2<br>
 05.03.23 09:00-10:30<br>
 06.03.23 11:00-13:39<br>
 02.03.23 10:00-17:00<br>
 
-person 3
+person 3<br>
 23.02.23 00:00-23:30<br>
 24.02.23 00:00-23:30<br>
 25.02.23 00:00-23:30<br>
