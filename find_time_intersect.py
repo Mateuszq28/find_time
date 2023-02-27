@@ -122,7 +122,7 @@ def main():
     common = sorted(find_common_time(person_time_list))
     common_text = scope2text(common)
     print(common_text)
-    path = os.path.join(dirname, "result.txt")
+    path = os.path.join(dirname, "result_intersect.txt")
     with open(path, 'w') as f:
         f.write(common_text)
 
